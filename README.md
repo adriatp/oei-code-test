@@ -1,5 +1,24 @@
 # README
 
+## Versiones
+
+
+
+## Ejecución
+
+```bash
+
+```
+
+- Crear fitxer `application.yml`
+- Modificar fitxer `database.yml`
+
+
+rails generate scaffold School name:string
+rails generate scaffold Theme name:string school:references
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
