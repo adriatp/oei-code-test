@@ -27,6 +27,8 @@ Para ejecutar las pruebas de test, si estamos en ubuntu, simplemente ejecutamos 
 ./test_attach.sh
 ```
 
+![Alt text](image.png)
+
 ### Comentarios
 
 #### Script `test_attach.sh`
