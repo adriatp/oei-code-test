@@ -29,7 +29,7 @@ module Editions
           courses: name_filtered_courses
         }
       end
-      if date_courses.count > 1 && criteria.include?('closest') 
+      if date_courses.count > 1 && criteria.include?('closest')
         date_courses = closest_date_courses(date_courses)
       elsif date_courses.count > 1 && criteria.include?('latest')
         date_courses = latest_date_courses(date_courses)
@@ -53,9 +53,8 @@ module Editions
 
     def sorted_following_date_courses(date_courses)
       date_now = DateTime.now.to_date
-      date_courses = date_courses.sort_by { |dc| dc[:date]}
-      date_courses = date_courses.filter { |dc| dc if Date.parse(dc[:date]) >= date_now }
-      date_courses
+      date_courses = date_courses.sort_by { |dc| dc[:date] }
+      date_courses.filter { |dc| dc if Date.parse(dc[:date]) >= date_now }
     end
 
     def sorted_following_edition_dates(editions)
