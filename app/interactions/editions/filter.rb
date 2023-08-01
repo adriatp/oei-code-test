@@ -13,11 +13,7 @@ module Editions
 
     def filter_by_criteria(editions, criteria)
       date_courses = []
-      list_idx_editions = (0..editions.count - 1).to_a
-      list_idx_editions = list_idx_editions.intersection(idx_closest_editions(editions)) if criteria.include? 'closest'
-      list_idx_editions = list_idx_editions.intersection(idx_latest_editions(editions)) if criteria.include? 'latest'
-      filtered_editions = editions.values_at(*list_idx_editions)
-      filtered_editions.each do |e|
+      editions.each do |e|
         list_idx_courses = (0..e[:courses].count - 1).to_a
         criteria.filter { |x| x.include? 'type' }.each do |tc|
           list_idx_courses = list_idx_courses.intersection(idx_courses_by_type(e[:courses], tc.split('-', 2)[1]))
@@ -33,6 +29,32 @@ module Editions
           courses: name_filtered_courses
         }
       end
+      if date_courses.count > 1 && criteria.include?('closest') 
+        date_courses = closest_date_courses(date_courses)
+      elsif date_courses.count > 1 && criteria.include?('latest')
+        date_courses = latest_date_courses(date_courses)
+      end
+      date_courses
+    end
+
+    def closest_date_courses(date_courses)
+      sf_date_courses = sorted_following_date_courses(date_courses)
+      sf_date_courses.select do |dc|
+        dc[:date] == sf_date_courses.first[:date]
+      end
+    end
+
+    def latest_date_courses(date_courses)
+      sf_date_courses = sorted_following_date_courses(date_courses)
+      sf_date_courses.select do |dc|
+        dc[:date] == sf_date_courses.last[:date]
+      end
+    end
+
+    def sorted_following_date_courses(date_courses)
+      date_now = DateTime.now.to_date
+      date_courses = date_courses.sort_by { |dc| dc[:date]}
+      date_courses = date_courses.filter { |dc| dc if Date.parse(dc[:date]) >= date_now }
       date_courses
     end
 
