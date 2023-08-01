@@ -64,16 +64,6 @@ module Editions
       following_edition_dates.sort
     end
 
-    def idx_closest_editions(editions)
-      editions.each_index.select do |i|
-        Date.parse(editions[i][:date]) == sorted_following_edition_dates(editions).first
-      end
-    end
-
-    def idx_latest_editions(editions)
-      editions.each_index.select { |i| Date.parse(editions[i][:date]) == sorted_following_edition_dates(editions).last }
-    end
-
     def idx_courses_by_type(courses, type_name)
       courses.each_index.select { |i| courses[i][:type] == type_name }
     end
@@ -82,6 +72,8 @@ module Editions
       valid_types = School.find_by(name: school_name).themes&.pluck(:name).to_a
       courses.each_index.select { |i| valid_types.include? courses[i][:type] }
     end
+
+    # Validations
 
     def valid_payload?
       if conflicting_criteria? criteria
