@@ -1,0 +1,1 @@
+{"criteria":["latest"],"editions":[{"date":"2023-06-01","courses":[{"name":"Especialista en cooperación internacional","type": "tipo_erroneo"}]}]}|{"error":"Tipo de curso incorrecto"}

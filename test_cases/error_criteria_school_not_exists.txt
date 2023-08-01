@@ -1,0 +1,1 @@
+{"criteria":["type-error_school"],"editions":[{"date":"2023-06-01","courses":[{"name":"Especialista en cooperación internacional","type": "cooperacion"}]},{"date":"2023-09-01","courses":[{"name": "Comprendiendo el portugués","type": "portugues"}]}]}|{"error":"Criterio de selección incorrecto"}

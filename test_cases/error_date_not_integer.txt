@@ -1,0 +1,1 @@
+{"criteria":["latest"],"editions":[{"date":"AAAA-06-01","courses":[{"name":"Especialista en cooperación internacional","type": "cooperacion"}]},{"date":"2023-09-01","courses":[{"name": "Comprendiendo el portugués","type": "portugues"}]}]}|{"error":"Fecha incorrecta, formato esperado: 'YYYY-MM-DD'"}
