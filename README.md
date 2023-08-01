@@ -1,43 +1,43 @@
 # README
 
-## Versiones
-
-
-
-## Ejecución
+## Versiones de programas
 
 ```bash
-
+ruby 3.2.0
+mysql 8.0.33-0ubuntu0.20.04.2
 ```
 
-- Crear fitxer `application.yml`
-- Modificar fitxer `database.yml`
+## Ejecución del servidor
 
+```bash
+git clone git@github.com:adriatp/oei-code-test.git
+cd oei-code-test
+cp application.example.yml application.yml
+# Rellenamos application.yml con las credenciales de MySQL
+bundle install
+rails db:create db:migrate db:seed
+rails s  
+```
 
-rails generate scaffold School name:string
-rails generate scaffold Theme name:string school:references
+## Testing
 
+Para ejecutar las pruebas de test, si estamos en ubuntu, simplemente ejecutamos el script
 
+```bash
+./test_attach.sh
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Comentarios
 
-Things you may want to cover:
+#### Script `test_attach.sh`
 
-* Ruby version
+1. Establecer el puerto de la aplicación (`8888` -> `3000`)
+2. Cambio en el endpoint (`radar` -> `api_app/v1/editions/filter`)
+3. Ejecución de todos los ficheros `.txt` de la carpeta `test_cases`
 
-* System dependencies
+#### Ficheros de test
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- El test proporcionado por el enunciado es `test_cases/ok.txt`
+- He borrado un par de espacios que se esperaba despues de algunos atributos 'date' ya que no estan presentes todas los inputs
+- En el test 2 he cambiado el valor esperado 'de' por 'en' ya que así está en curso de entrada
+- Interpreté que 'closest' devolvía cursos de la próxima edición y 'latest' de la última (posteriores a fecha actual) pero en el test 4 devuelve un curso de una edición anterior así que para cumplir con el test hice que no se apliquen estos criterios en caso de solo tener que filtrar temporalmente en una sola edición
